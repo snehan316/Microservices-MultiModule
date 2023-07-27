@@ -3,13 +3,14 @@ package com.sneha.microservices.inventoryservice;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 import com.sneha.microservices.inventoryservice.model.Inventory;
 import com.sneha.microservices.inventoryservice.repository.InventoryRepository;
-import com.sneha.microservices.inventoryservice.service.InventoryService;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class InventoryServiceApplication {
 
 	public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class InventoryServiceApplication {
 			Inventory inventory2 = new Inventory();
 
 			inventory2.setSkuCode("Dell Monitor");
-			inventory2.setQuantity(10);
+			inventory2.setQuantity(0);
 			
 			inventoryRepository.save(inventory1);
 			inventoryRepository.save(inventory2);
