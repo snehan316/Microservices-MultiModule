@@ -2,31 +2,40 @@ package com.sneha.microservices.ordersservice.dto;
 
 import java.util.List;
 
-import com.sneha.microservices.ordersservice.model.OrderItems;
-
 public class OrderRequest {
-	private List<OrderItemsDto> orderItems;
 	
-	
+    private List<OrderLineItemsDto> orderLineItemsDtoList;
+       
+
 	public OrderRequest() {
 		super();
 	}
 
-	public OrderRequest(List<OrderItemsDto> orderItems) {
+
+
+	public OrderRequest(List<OrderLineItemsDto> orderLineItemsDtoList) {
 		super();
-		this.orderItems = orderItems;
+		this.orderLineItemsDtoList = orderLineItemsDtoList;
 	}
 
 
-	public List<OrderItemsDto> getOrderItems() {
-		return orderItems;
+
+	public List<OrderLineItemsDto> getOrderLineItemsDtoList() {
+		return orderLineItemsDtoList;
 	}
 
-	public void setOrderItems(List<OrderItemsDto> orderItems) {
-		this.orderItems = orderItems;
+
+
+	public void setOrderLineItemsDtoList(List<OrderLineItemsDto> orderLineItemsDtoList) {
+		this.orderLineItemsDtoList = orderLineItemsDtoList;
 	}
-	
-	
-	
-	
+
+
+
+	@Override
+	public String toString() {
+		return "OrderRequest [orderLineItemsDtoList=" + orderLineItemsDtoList + "]";
+	}
+    
+    
 }

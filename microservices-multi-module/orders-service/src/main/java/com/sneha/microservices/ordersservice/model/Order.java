@@ -1,63 +1,57 @@
 package com.sneha.microservices.ordersservice.model;
 
+
+import jakarta.persistence.*;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
 @Entity
-@Table(name="t_orders")
+@Table(name = "t_orders")
 public class Order {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	private String orderNumber;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	private List<OrderItems> orderItems;
-	
-	public Order() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
+    private String orderNumber;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OrderLineItems> orderLineItemsList;
+     
+    
+   	public Order() {
 		super();
 	}
-
-	public Order(long id, String orderNumber, List<OrderItems> orderItems) {
+   	
+	public Order(Long id, String orderNumber, List<OrderLineItems> orderLineItemsList) {
 		super();
 		this.id = id;
 		this.orderNumber = orderNumber;
-		this.orderItems = orderItems;
+		this.orderLineItemsList = orderLineItemsList;
 	}
-
-	public long getId() {
+	
+	public Long getId() {
 		return id;
 	}
-
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getOrderNumber() {
 		return orderNumber;
 	}
-
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
-
-	public List<OrderItems> getOrderItems() {
-		return orderItems;
+	public List<OrderLineItems> getOrderLineItemsList() {
+		return orderLineItemsList;
 	}
-
-	public void setOrderItems(List<OrderItems> orderItems) {
-		this.orderItems = orderItems;
+	public void setOrderLineItemsList(List<OrderLineItems> orderLineItemsList) {
+		this.orderLineItemsList = orderLineItemsList;
 	}
 	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", orderNumber=" + orderNumber + ", orderLineItemsList=" + orderLineItemsList + "]";
+	}
+    
+    
 }
