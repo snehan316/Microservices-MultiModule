@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sneha.microservices.ordersservice.dto.OrderRequest;
 import com.sneha.microservices.ordersservice.service.OrderService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -23,9 +25,15 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CircuitBreaker(name="inventory", fallbackMethod = "fallbackMethod")
     public String placeOrder(@RequestBody OrderRequest orderRequest) {
     	orderService.placeOrder(orderRequest);
         return "Order placed Successfully";
+    }
+    
+    //should have the same method return type as placeOrder method (where circuit-breaker is added)
+    public String fallbackMethod(OrderRequest orderRequest, RuntimeException runTimeException) {
+        return "Something went wrong, please try again after sometime";
     }
 
 }
